@@ -1,0 +1,66 @@
+.Flickr {
+	.loading {
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	.frame {
+		transform: translateY(200px);
+		opacity: 0;
+		transition: 1s;
+		&.on {
+			transform: translateY(0);
+			opacity: 1;
+		}
+		&::after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+		article {
+			width: 25%;
+			float: left;
+			padding: 10px;
+			.inner {
+				width: 100%;
+				background: #fff;
+				box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+				padding: 10px;
+				.pic {
+					width: 100%;
+					margin-bottom: 10px;
+					cursor: pointer;
+					img {
+						width: 100%;
+					}
+				}
+				h2 {
+					font: normal 14px/1.2 'arial';
+					color: #777;
+					margin-bottom: 20px;
+					// word-wrap: normal   // 단어단위로 줄바꿈
+					word-wrap: break-word; // 글자단위로 줄바꿈
+				}
+				.profile {
+					display: flex;
+					justify-content: flex-start;
+					align-items: center;
+					img {
+						width: 40px;
+						height: 40px;
+					}
+					span {
+						font: 12px/1 'arial';
+						color: orange;
+						margin-left: 10px;
+						cursor: pointer;
+						&:hover {
+							color: aqua;
+						}
+					}
+				}
+			}
+		}
+	}
+}

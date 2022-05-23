@@ -1,0 +1,73 @@
+header {
+	width: 100%;
+	background: #fff;
+	border-bottom: 1px solid black;
+	.inner {
+		width: 1180px;
+		height: 80px;
+		margin: 0 auto;
+		position: relative;
+		h1 {
+			position: absolute;
+			bottom: 20px;
+			left: 0;
+			a {
+				font: bold 24px/1 'arial';
+				color: #333;
+			}
+		}
+		#gnb {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			li {
+				float: left;
+				a {
+					display: inline-block;
+					padding: 22px 30px;
+					font: bold 14px/1 'arial';
+					color: #000;
+				}
+			}
+		}
+		.menuMo {
+			position: absolute;
+			right: 30px;
+			bottom: 20px;
+			font-size: 24px;
+			color: #fff;
+			display: none;
+		}
+	}
+	&.main {
+		// 투명하게
+		background: transparent;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 2;
+		border: none;
+	}
+}
+
+// 태블릿
+@media screen and (max-width: $tablet) {
+	header {
+		.inner {
+			width: 100%;
+			h1 {
+				left: 30px;
+			}
+			#gnb {
+				display: none;
+			}
+			.menuMo {
+				display: block;
+			}
+		}
+	}
+}
+
+// 모바일
+@media screen and (max-width: $mp) {
+}

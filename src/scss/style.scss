@@ -1,0 +1,26 @@
+$tablet: 1179px;
+$mp: 639px;
+
+// common
+@import 'common/reset';
+@import 'common/header';
+@import 'common/footer';
+@import 'common/layout';
+@import 'common/popup';
+@import 'common/menu';
+
+// main
+@import 'main/visual';
+@import 'main/news';
+@import 'main/pics';
+@import 'main/vids';
+@import 'main/btns';
+
+// sub
+@import 'sub/department';
+@import 'sub/community';
+@import 'sub/gallery';
+@import 'sub/youtube';
+@import 'sub/location';
+@import 'sub/join';
+@import 'sub/flickr';

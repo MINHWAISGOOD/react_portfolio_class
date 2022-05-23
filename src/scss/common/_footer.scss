@@ -1,0 +1,49 @@
+footer {
+	width: 100%;
+	background: lightgray;
+	border-top: 1px solid #bbb;
+	.inner {
+		width: 1180px;
+		margin: 0 auto;
+		position: relative;
+		padding: 50px;
+		h1 {
+			font: 24px/1 'arial';
+			color: #000;
+			text-align: left;
+		}
+		address {
+			width: 100%;
+			font: 12px/1.2 'arial';
+			color: #000;
+			margin-bottom: 20px;
+			margin-top: 0;
+			padding: 20px 0;
+			float: left;
+			border-bottom: 1px solid #000;
+			letter-spacing: 2px;
+		}
+		p {
+			font: 12px/1.2 'arial';
+			color: #000;
+			text-align: right;
+			letter-spacing: 2px;
+		}
+		.members > img {
+			width: 50px;
+		}
+	}
+}
+
+// 태블릿
+@media screen and (max-width: $tablet) {
+	footer {
+		.inner {
+			width: 100%;
+		}
+	}
+}
+
+// 모바일
+@media screen and (max-width: $mp) {
+}

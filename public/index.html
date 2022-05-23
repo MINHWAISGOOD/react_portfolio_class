@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74592ef4b37199871c23ff52bdfbe3a8"></script>
+  <title>React App</title>
+  <style>
+    .default {
+      position: absolute;
+      top: -99999px;
+    }
+
+    .mask {
+      width: 100%;
+      height: 100vh;
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      z-index: 10;
+      transition: opacity 1s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font: 20px/1 'arial';
+      color: #fff;
+      background: #111;
+    }
+
+    .mask.off {
+      opacity: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+
+  <!-- 강제로 img, video태드를 출력해서 이미지와 영상을 캐싱하기 위한 공간, 화면에서는 숨김처리 -->
+  <div class="default"></div> -->
+  <!-- 모든 이미지와 영상이 로딩완료되기전까지 화면을 가려줄 로딩박스 -->
+  <div class="mask">Loading...</div>
+
+  <script>
+    const imgs = [
+      'http://localhost:3000/react_portfolio_class/img/pic1.jpg',
+      'http://localhost:3000/react_portfolio_class/img/pic2.jpg',
+      'http://localhost:3000/react_portfolio_class/img/pic3.jpg',
+      'http://localhost:3000/react_portfolio_class/img/pic4.jpg',
+      'http://localhost:3000/react_portfolio_class/img/pic5.jpg',
+      'http://localhost:3000/react_portfolio_class/img/pic6.jpg',
+    ];
+    let loadedImg = false;
+    const lenImg = imgs.length;
+    const defaults = document.querySelector('.default');
+    const mask = document.querySelector('.mask');
+    tags = '';
+
+    function createDOM() {
+      imgs.forEach(src => {
+        tags += `<img src=${src} />`
+        console.log('TAGS!!! :' + tags);
+      })
+      defaults.innerHTML = tags;
+      console.log('DEFAULTS!!1 :' + defaults);
+    }
+
+    function loadImg() {
+      return new Promise((res, rej) => {
+        const imgDOM = defaults.querySelectorAll('img');
+        let countImg = 0;
+
+        imgDOM.forEach((img) => {
+          img.onload = () => {
+            countImg++;
+            if (lenImg === countImg) {
+              loadedImg = true;
+              res(loadedImg);
+            }
+          }
+        })
+      })
+    }
+
+    //먼저 배열로부터 img돔을 만들고
+    createDOM();
+    //img의 소스이미지가 모두 로딩완료되면 then구문이 동기적으로 실행
+    loadImg().then((result) => {
+      console.log(result);
+
+      if (result) {
+        mask.classList.add('off');
+
+        setTimeout(() => {
+          mask.remove();
+        }, 2000);
+      }
+    });
+  </script>
+
+</body>
+
+</html>

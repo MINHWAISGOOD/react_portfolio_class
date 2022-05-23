@@ -1,0 +1,46 @@
+.Gallery {
+	ul {
+		&::after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+		li {
+			float: left;
+			width: 20%;
+			padding: 10px;
+			.inner {
+				width: 100%;
+				padding: 10px;
+				border: 1px solid #999;
+				.pic {
+					width: 100%;
+					margin-bottom: 15px;
+					img {
+						width: 100%;
+					}
+				}
+				p {
+					font: 14px/1.2 'arial';
+					color: #777;
+					margin-bottom: 15px;
+				}
+				.profile {
+					display: flex;
+					align-items: center;
+					margin-bottom: 10px;
+					img {
+						width: 30px;
+						height: 30px;
+						border-radius: 50%;
+					}
+					span {
+						font: 12px/1 'arial';
+						color: orange;
+						margin-left: 10px;
+					}
+				}
+			}
+		}
+	}
+}
