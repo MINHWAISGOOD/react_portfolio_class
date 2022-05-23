@@ -53,52 +53,81 @@
       'http://minhwaisgood.github.io/react_portfolio_class/img/pic5.jpg',
       'http://minhwaisgood.github.io/react_portfolio_class/img/pic6.jpg',
     ];
+    const vids = [
+      'http://minhwaisgood.github.io/react_portfolio_class/img/visual.mp4',
+    ];
+
     let loadedImg = false;
     const lenImg = imgs.length;
+    const lenVid = vids.length;
     const defaults = document.querySelector('.default');
     const mask = document.querySelector('.mask');
     tags = '';
 
+
+    //처음 index.html이 브라우저에 출력되자마자 일단은 로딩화면 뜨도록 설정
+    //동적으로 배열에 있는  이미지 소스로 img DOM을 만들어서 index.html에 꽃아넣어서 캐싱처리
+    createDOM();
+
+    //동적으로 만들어진 img, vid dom의 이미지, 영상 소스가 모두 로딩완료되서 
+    //두함수 모두 promise객체를 리턴하면 동기적으로 then구문 실행
+    Promise.all([loadImg(), loadVid()]).then((result) => {
+      console.log(result);
+
+      if (result) {
+        //로딩화면 페이드아웃 처리하고
+        mask.classList.add('off');
+
+        //페이드아웃 모션이 끝나면 DOM자체를 제거
+        setTimeout(() => {
+          mask.remove();
+          defaults.remove();
+        }, 2000);
+      }
+    });
+
+    //배열 데이터를 동적 DOM생성함수
     function createDOM() {
       imgs.forEach(src => {
         tags += `<img src=${src} />`
-        console.log('TAGS!!! :' + tags);
+      })
+      vids.forEach(src => {
+        tags += `<video src=${src}></video>`;
       })
       defaults.innerHTML = tags;
-      console.log('DEFAULTS!!1 :' + defaults);
     }
 
+    //모든 이미지소스가 로딩완료되면 프로미스 객체로 true반환함수
     function loadImg() {
       return new Promise((res, rej) => {
         const imgDOM = defaults.querySelectorAll('img');
         let countImg = 0;
-
         imgDOM.forEach((img) => {
           img.onload = () => {
             countImg++;
             if (lenImg === countImg) {
-              loadedImg = true;
-              res(loadedImg);
+              res(true);
             }
           }
         })
       })
     }
 
-    //먼저 배열로부터 img돔을 만들고
-    createDOM();
-    //img의 소스이미지가 모두 로딩완료되면 then구문이 동기적으로 실행
-    loadImg().then((result) => {
-      console.log(result);
+    function loadVid() {
+      return new Promise((res, rej) => {
+        const vidDOM = defaults.querySelectorAll('video');
+        let countVid = 0;
 
-      if (result) {
-        mask.classList.add('off');
-
-        setTimeout(() => {
-          mask.remove();
-        }, 2000);
-      }
-    });
+        vidDOM.forEach((vid) => {
+          vid.onloadeddata = () => {
+            countVid++;
+            if (countVid === lenVid) {
+              res(true);
+            }
+          }
+        })
+      })
+    }
   </script>
 
 </body>
